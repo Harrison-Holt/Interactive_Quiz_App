@@ -1,0 +1,67 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { fetchQuizQuestions } from '../Logic/HomePageLogic'; 
+
+function Homepage() {
+
+    const [num_questions, setNumQuestions] = useState(5);
+    const [difficulty, setDifficulty] = useState('Easy');
+    const [category, setCategory] = useState('general_knownlegde');
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log({num_questions, difficulty, category}); 
+      }
+
+    // Parent container style to center content
+    const containerStyle = {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh' // This assumes the parent container takes the full viewport height
+    };
+
+    // Style for the form to align its content
+    const formStyle = {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '80%', // Adjust the form width as needed
+        maxWidth: '500px', // Maximum form width for large screens
+    };
+
+    return (
+        <div style={containerStyle}>
+            <form id='form' onSubmit={handleSubmit} style={formStyle}>
+                <label htmlFor='num_question'>Enter # of questions:</label>
+                <input
+                    id='num_question'
+                    type='number'
+                    required
+                    value={num_questions}
+                    onChange={(e) => setNumQuestions(parseInt(e.target.value, 10) || '')}
+                    min={5} max={50}
+                /><br/><br/>
+                <label htmlFor='select_difficulty'>Select difficulty:</label>
+                <select value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
+                    <option value='Easy'>Easy</option>
+                    <option value='Medium'>Medium</option>
+                    <option value='Hard'>Hard</option>
+                </select><br/><br/>
+                <label htmlFor='select_category'>Select category:</label>
+                <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                    <option value='general_knownlegde'>General Knowledge</option>
+                    <option value='sports'>Sports</option>
+                    <option value='history'>History</option>
+                    <option value='geography'>Geography</option>
+                    <option value='computer_science'>Computer Science</option>
+                </select><br/><br/>
+                <button type="submit">Start Quiz</button>
+            </form>
+        </div>
+    );
+}
+
+export default Homepage;
+
