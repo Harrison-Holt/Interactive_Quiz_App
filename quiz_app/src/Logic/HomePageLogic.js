@@ -15,10 +15,11 @@ export async function fetchQuizQuestions(numQuestions, category, difficulty) {
         const response = await fetch(apiUrl);
         if (!response.ok) throw new Error('Response not OK');
         const data = await response.json();
-        return data.results; // Return the quiz questions
+        console.log(data); 
+        return data.results; 
     } catch (error) {
         console.error("Error fetching questions:", error);
-        throw error; // Rethrow the error to be handled by the caller
+        throw error; 
     }
 }
 

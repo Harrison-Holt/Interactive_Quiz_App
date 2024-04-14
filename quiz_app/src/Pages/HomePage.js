@@ -13,27 +13,27 @@ function Homepage() {
         console.log({num_questions, difficulty, category}); 
       }
 
-    // Parent container style to center content
     const containerStyle = {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '100vh' // This assumes the parent container takes the full viewport height
+        height: '100vh' 
     };
 
-    // Style for the form to align its content
     const formStyle = {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        width: '80%', // Adjust the form width as needed
-        maxWidth: '500px', // Maximum form width for large screens
+        width: '80%', 
+        maxWidth: '500px', 
+        backgroundColor: 'tan', 
+
     };
 
     return (
         <div style={containerStyle}>
-            <form id='form' onSubmit={handleSubmit} style={formStyle}>
+            <form id='form' onSubmit={handleSubmit} style={formStyle} >
                 <label htmlFor='num_question'>Enter # of questions:</label>
                 <input
                     id='num_question'

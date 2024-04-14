@@ -5,9 +5,7 @@ function Header() {
     return (
         <header style={headerStyle}>
             <nav style={navStyle}>
-                <Link to="/" style={linkStyle}>Home</Link>
-                <Link to="/quiz" style={linkStyle}>Quiz</Link>
-                <Link to="/result" style={linkStyle}>Results</Link>
+                <a href="https://personal-blog-website-kappa.vercel.app/" style="font-size:24px;">Home Page</a>
             </nav>
         </header>
     );
