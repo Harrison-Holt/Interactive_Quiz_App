@@ -5,7 +5,7 @@ function Header() {
     return (
         <header style={headerStyle}>
             <nav style={navStyle}>
-                <a href="https://personal-blog-website-kappa.vercel.app/" style="font-size:24px;">Home Page</a>
+            <a href="https://personal-blog-website-kappa.vercel.app/" style={{ fontSize: '24px', color: 'white' }}>Home Page</a>
             </nav>
         </header>
     );
