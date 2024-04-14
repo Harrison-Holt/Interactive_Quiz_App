@@ -11,6 +11,7 @@ function Homepage() {
       const handleSubmit = async (e) => {
         e.preventDefault();
         console.log({num_questions, difficulty, category}); 
+        fetchQuizQuestions(numQuestions, category, difficulty); 
       }
 
     const containerStyle = {
