@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Homepage() {
     const [num_questions, setNumQuestions] = useState(5);
-    const [difficulty, setDifficulty] = useState('Easy');
+    const [difficulty, setDifficulty] = useState('easy');
     const [category, setCategory] = useState('General Knowledge');
     const navigate = useNavigate();
 
@@ -53,9 +53,9 @@ function Homepage() {
                 /><br/><br/>
                 <label htmlFor='select_difficulty'>Select difficulty:</label>
                 <select value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
-                    <option value='Easy'>Easy</option>
-                    <option value='Medium'>Medium</option>
-                    <option value='Hard'>Hard</option>
+                    <option value='easy'>Easy</option>
+                    <option value='medium'>Medium</option>
+                    <option value='hard'>Hard</option>
                 </select><br/><br/>
                 <label htmlFor='select_category'>Select category:</label>
                 <select value={category} onChange={(e) => setCategory(e.target.value)}>

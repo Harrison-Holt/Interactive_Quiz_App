@@ -11,7 +11,20 @@ const QuizPage = () => {
 
     // Function to fetch questions from the API
     const fetchQuestions = async (num_questions, category, difficulty) => {
-        const apiUrl = `https://opentdb.com/api.php?amount=${num_questions}&category=${category}&difficulty=${difficulty}&type=multiple`;
+
+    // Mapping of category names to their corresponding API integer codes
+    const categoryMap = {
+        "General Knowledge": 9,
+        "Computer Science": 18,
+        "Sports": 21,
+        "Geography": 22,
+        "History": 23
+    };
+
+    // Convert the category string to its corresponding integer code
+    const categoryCode = categoryMap[category] || 9; // Default to General Knowledge if not found
+
+        const apiUrl = `https://opentdb.com/api.php?amount=${num_questions}&category=${categoryCode}&difficulty=${difficulty}&type=multiple`;
         try {
             const response = await fetch(apiUrl);
             if (!response.ok) throw new Error('Failed to fetch the quiz questions.');
