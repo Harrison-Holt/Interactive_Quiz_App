@@ -12,9 +12,7 @@ function Homepage() {
         console.log({num_questions, difficulty, category});
 
         try {
-            const questions = await fetchQuizQuestions(num_questions, category, difficulty);
-            console.log(questions);
-            navigate('/quiz', { state: { questions, num_questions, category, difficulty } });  
+            navigate('/quiz', { state: {num_questions, category, difficulty } });  
         } catch (error) {
             console.error("Error fetching quiz questions:", error);
         }
