@@ -24,9 +24,9 @@ const QuizPage = () => {
     };
 
     useEffect(() => {
-        const initializeQuiz = async () => {
+        const initializeQuiz = async (num_questions, category, difficulty) => {
             if (!questions.length) {
-                const newQuestions = await fetchQuestions(); // Use default parameters or modify as needed
+                const newQuestions = await fetchQuestions(num_questions, category, difficulty); // Use default parameters or modify as needed
                 setQuestions(newQuestions);
                 setUserAnswers(new Array(newQuestions.length).fill(null));
             } else {
