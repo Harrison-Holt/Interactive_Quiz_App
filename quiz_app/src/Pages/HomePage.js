@@ -8,13 +8,19 @@ function Homepage() {
     const [difficulty, setDifficulty] = useState('Easy');
     const [category, setCategory] = useState('general_knownlegde');
 
-      const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log({num_questions, difficulty, category}); 
-        fetchQuizQuestions(num_questions, category, difficulty); 
-
-        console.log(data); 
-      }
+    
+        console.log({num_questions, difficulty, category});  // Logs the current state values to the console
+    
+        try {
+            const data = await fetchQuizQuestions(num_questions, category, difficulty);  // Waits for the promise to resolve and stores the result in `data`
+            console.log(data);  // Logs the fetched data to the console
+        } catch (error) {
+            console.error("Error fetching quiz questions:", error);  // Logs any errors that occur during the fetch operation
+        }
+    };
+    
 
     const containerStyle = {
         display: 'flex',
