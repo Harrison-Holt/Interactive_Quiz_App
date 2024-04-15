@@ -52,11 +52,11 @@ function Homepage() {
                 </select><br/><br/>
                 <label htmlFor='select_category'>Select category:</label>
                 <select value={category} onChange={(e) => setCategory(e.target.value)}>
-                    <option value='general_knownlegde'>General Knowledge</option>
-                    <option value='sports'>Sports</option>
-                    <option value='history'>History</option>
-                    <option value='geography'>Geography</option>
-                    <option value='computer_science'>Computer Science</option>
+                    <option value='General Knownlegde'>General Knowledge</option>
+                    <option value='Sports'>Sports</option>
+                    <option value='History'>History</option>
+                    <option value='Geography'>Geography</option>
+                    <option value='Computer Science'>Computer Science</option>
                 </select><br/><br/>
                 <button type="submit">Start Quiz</button>
             </form>
