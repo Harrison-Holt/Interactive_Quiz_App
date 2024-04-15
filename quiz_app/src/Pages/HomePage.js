@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchQuizQuestions } from '../Logic/HomePageLogic'; 
 
 function Homepage() {
     const [num_questions, setNumQuestions] = useState(5);
