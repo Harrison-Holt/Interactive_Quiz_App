@@ -24,10 +24,15 @@ const QuizPage = () => {
     // Convert the category string to its corresponding integer code
     const categoryCode = categoryMap[category] || 9; // Default to General Knowledge if not found
 
+    console.log(categoryCode, difficulty); 
+    
+
         const apiUrl = `https://opentdb.com/api.php?amount=${num_questions}&category=${categoryCode}&difficulty=${difficulty}&type=multiple`;
         try {
             const response = await fetch(apiUrl);
-            if (!response.ok) throw new Error('Failed to fetch the quiz questions.');
+            if (!response.ok) {
+                throw new Error('Failed to fetch the quiz questions.');
+            }
             const data = await response.json();
             return data.results;
         } catch (error) {
