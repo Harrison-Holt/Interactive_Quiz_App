@@ -64,7 +64,7 @@ const QuizPage = () => {
                 <div>
                     <h2>Question {currentQuestionIndex + 1}:</h2>
                     <h3 dangerouslySetInnerHTML={{ __html: currentQuestion.question }} />
-                    <ul style={{ listStyle type: 'none' }}>
+                    <ul style={{ listStyleType: 'none' }}>
                         {options.map((option, index) => (
                             <li key={index} style={{ margin: '10px 0', cursor: 'pointer' }}>
                                 <button style={{ padding: '10px 20px' }} onClick={() => handleAnswer(option)}>
