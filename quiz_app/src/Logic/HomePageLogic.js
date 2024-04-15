@@ -18,7 +18,6 @@ export async function fetchQuizQuestions(num_questions, category, difficulty) {
         category = 18; 
     }
     
-    const apiCategory = categoryMapping[category];
     const apiDifficulty = difficulty.toLowerCase();
     const apiUrl = `https://opentdb.com/api.php?amount=${num_questions}&category=${category}&difficulty=${difficulty}&type=multiple`;
 
