@@ -2,6 +2,7 @@
 // ? 
 export async function fetchQuizQuestions(num_questions, category, difficulty) {
 
+    console.log(category); 
         const categoryMap = {
             "General Knowledge": 9,
             "Sports": 21,
