@@ -3,23 +3,25 @@ import { useNavigate } from 'react-router-dom';
 import { fetchQuizQuestions } from '../Logic/HomePageLogic'; 
 
 function Homepage() {
-
     const [num_questions, setNumQuestions] = useState(5);
     const [difficulty, setDifficulty] = useState('Easy');
     const [category, setCategory] = useState('General Knowledge');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
-        console.log({num_questions, difficulty, category}); 
-    
+        console.log({num_questions, difficulty, category});
+
         try {
-            const data = await fetchQuizQuestions(num_questions, category, difficulty);  
-            console.log(data); 
+            const questions = await fetchQuizQuestions(num_questions, category, difficulty);
+            console.log(questions);
+            navigate('/quiz', { state: { questions, num_questions, category, difficulty } });  
         } catch (error) {
-            console.error("Error fetching quiz questions:", error);  
+            console.error("Error fetching quiz questions:", error);
         }
     };
+
+
     
 
     const containerStyle = {
