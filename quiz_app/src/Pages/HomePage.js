@@ -4,9 +4,9 @@ import { fetchQuizQuestions } from '../Logic/HomePageLogic';
 
 function Homepage() {
 
-    const [num_questions, setNumQuestions] = useState();
-    const [difficulty, setDifficulty] = useState('');
-    const [category, setCategory] = useState('');
+    const [num_questions, setNumQuestions] = useState(5);
+    const [difficulty, setDifficulty] = useState('Easy');
+    const [category, setCategory] = useState('General Knowledge');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
