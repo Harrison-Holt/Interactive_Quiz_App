@@ -2,24 +2,19 @@
 // ? 
 export async function fetchQuizQuestions(num_questions, category, difficulty) {
 
-    if(category === "General Knowledge") {
-        category = 9; 
-    }
-    else if (category === "Sports") {
-        category = 21; 
-    }
-    else if(category === "History") {
-        category = 23; 
-    }
-    else if(category === "Geography") {
-        category = 22; 
-    }
-    else if (category === "Computer Science") {
-        category = 18; 
-    }
+        const categoryMap = {
+            "General Knowledge": 9,
+            "Sports": 21,
+            "History": 23,
+            "Geography": 22,
+            "Computer Science": 18
+        };
     
+    const categoryCode = categoryMap[category];
+    console.log(categoryCode); 
+
     const apiDifficulty = difficulty.toLowerCase();
-    const apiUrl = `https://opentdb.com/api.php?amount=${num_questions}&category=${category}&difficulty=${difficulty}&type=multiple`;
+    const apiUrl = `https://opentdb.com/api.php?amount=${num_questions}&category=${categoryCode}&difficulty=${apiDifficulty}&type=multiple`;
 
     try {
         const response = await fetch(apiUrl);
