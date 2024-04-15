@@ -9,28 +9,43 @@ const QuizPage = () => {
     const [score, setScore] = useState(0);
     const [quizFinished, setQuizFinished] = useState(false);
 
-    useEffect(() => {
-        if (!questions.length) {
-            // Handle case where questions are not passed or fetch them again if necessary
-            // For now, let's assume the data always comes properly formatted.
-            console.log('No questions passed to QuizPage, checking for a fallback.');
+    // Function to fetch questions from the API
+    const fetchQuestions = async (num_questions, category, difficulty) => {
+        const apiUrl = `https://opentdb.com/api.php?amount=${num_questions}&category=${category}&difficulty=${difficulty}&type=multiple`;
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) throw new Error('Failed to fetch the quiz questions.');
+            const data = await response.json();
+            return data.results;
+        } catch (error) {
+            console.error("Error fetching questions from API:", error);
+            return []; // Return an empty array as a fallback
         }
-        setUserAnswers(new Array(questions.length).fill(null));  // Initialize user answers with nulls
+    };
+
+    useEffect(() => {
+        const initializeQuiz = async () => {
+            if (!questions.length) {
+                const newQuestions = await fetchQuestions(); // Use default parameters or modify as needed
+                setQuestions(newQuestions);
+                setUserAnswers(new Array(newQuestions.length).fill(null));
+            } else {
+                setUserAnswers(new Array(questions.length).fill(null)); // Initialize user answers with nulls if questions are already there
+            }
+        };
+        initializeQuiz();
     }, [questions]);
 
     const handleAnswer = (selectedAnswer) => {
         const correctAnswer = questions[currentQuestionIndex].correct_answer;
-        // Update user answers
         const updatedAnswers = [...userAnswers];
         updatedAnswers[currentQuestionIndex] = selectedAnswer;
         setUserAnswers(updatedAnswers);
 
-        // Update score if correct
         if (selectedAnswer === correctAnswer) {
             setScore(prevScore => prevScore + 1);
         }
 
-        // Move to next question or finish quiz
         if (currentQuestionIndex < questions.length - 1) {
             setCurrentQuestionIndex(prevIndex => prevIndex + 1);
         } else {
@@ -41,8 +56,7 @@ const QuizPage = () => {
     if (!questions.length) return <div>Loading questions...</div>;
 
     const currentQuestion = questions[currentQuestionIndex];
-    const options = [...currentQuestion.incorrect_answers, currentQuestion.correct_answer]
-                      .sort(() => Math.random() - 0.5);  // Randomize options display
+    const options = [...currentQuestion.incorrect_answers, currentQuestion.correct_answer].sort(() => Math.random() - 0.5);
 
     return (
         <div style={{ padding: '20px' }}>
@@ -50,7 +64,7 @@ const QuizPage = () => {
                 <div>
                     <h2>Question {currentQuestionIndex + 1}:</h2>
                     <h3 dangerouslySetInnerHTML={{ __html: currentQuestion.question }} />
-                    <ul style={{ listStyleType: 'none' }}>
+                    <ul style={{ listStyle type: 'none' }}>
                         {options.map((option, index) => (
                             <li key={index} style={{ margin: '10px 0', cursor: 'pointer' }}>
                                 <button style={{ padding: '10px 20px' }} onClick={() => handleAnswer(option)}>
@@ -64,7 +78,6 @@ const QuizPage = () => {
                 <div>
                     <h1>Quiz Completed</h1>
                     <p>Your Score: {score} out of {questions.length}</p>
-                    {/* Optionally add a button to retry or go back */}
                 </div>
             )}
         </div>
@@ -72,4 +85,5 @@ const QuizPage = () => {
 };
 
 export default QuizPage;
+
 
