@@ -24,10 +24,10 @@ const QuizPage = () => {
     // Convert the category string to its corresponding integer code
     const categoryCode = categoryMap[category] || 9; // Default to General Knowledge if not found
 
-    console.log(categoryCode, difficulty); 
+    console.log(categoryCode); 
     
 
-        const apiUrl = `https://opentdb.com/api.php?amount=${num_questions}&category=${categoryCode}&difficulty=${difficulty}&type=multiple`;
+        const apiUrl = `https://opentdb.com/api.php?amount=${num_questions}&category=${categoryCode}&difficulty=easy&type=multiple`;
         try {
             const response = await fetch(apiUrl);
             if (!response.ok) {
