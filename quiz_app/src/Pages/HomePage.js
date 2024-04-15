@@ -12,6 +12,8 @@ function Homepage() {
         e.preventDefault();
         console.log({num_questions, difficulty, category}); 
         fetchQuizQuestions(num_questions, category, difficulty); 
+
+        console.log(data); 
       }
 
     const containerStyle = {
