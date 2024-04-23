@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 const QuizPage = () => {
     const { state } = useLocation();
-    const [questions, setQuestions] = useState(state?.questions || []);
+    const [questions, setQuestions] = useState([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [userAnswers, setUserAnswers] = useState([]);
     const [score, setScore] = useState(0);
@@ -11,23 +11,19 @@ const QuizPage = () => {
 
     // Function to fetch questions from the API
     const fetchQuestions = async (num_questions, category, difficulty) => {
+        // Mapping of category names to their corresponding API integer codes
+        const categoryMap = {
+            "General Knowledge": 19, 
+            "Computer Science": 18,
+            "Sports": 21,
+            "Geography": 22,
+            "History": 23
+        };
 
-    // Mapping of category names to their corresponding API integer codes
-    const categoryMap = {
-        "General Knowledge": 9,
-        "Computer Science": 18,
-        "Sports": 21,
-        "Geography": 22,
-        "History": 23
-    };
-
-    // Convert the category string to its corresponding integer code
-    const categoryCode = categoryMap[category] || 9; // Default to General Knowledge if not found
-
-    console.log(categoryCode); 
-    
-
-        const apiUrl = `https://opentdb.com/api.php?amount=${num_questions}&category=${categoryCode}&difficulty=easy&type=multiple`;
+        // Convert the category string to its corresponding integer code
+        const categoryCode = categoryMap[category] || 9; // Default to General Knowledge if not found
+        const apiUrl = `https://opentdb.com/api.php?amount=${num_questions}&category=${categoryCode}&difficulty=${difficulty}&type=multiple`;
+        
         try {
             const response = await fetch(apiUrl);
             if (!response.ok) {
@@ -37,22 +33,21 @@ const QuizPage = () => {
             return data.results;
         } catch (error) {
             console.error("Error fetching questions from API:", error);
-            return []; // Return an empty array as a fallback
+            return []; 
         }
     };
 
     useEffect(() => {
-        const initializeQuiz = async (num_questions, category, difficulty) => {
-            if (!questions.length) {
-                const newQuestions = await fetchQuestions(num_questions, category, difficulty); // Use default parameters or modify as needed
+        const initializeQuiz = async () => {
+            if (!questions.length && state) {
+                const { num_questions, category, difficulty } = state;
+                const newQuestions = await fetchQuestions(num_questions, category, difficulty);
                 setQuestions(newQuestions);
                 setUserAnswers(new Array(newQuestions.length).fill(null));
-            } else {
-                setUserAnswers(new Array(questions.length).fill(null)); // Initialize user answers with nulls if questions are already there
             }
         };
         initializeQuiz();
-    }, [questions]);
+    }, [state]); // Depend on state to make sure it's available
 
     const handleAnswer = (selectedAnswer) => {
         const correctAnswer = questions[currentQuestionIndex].correct_answer;
@@ -103,5 +98,6 @@ const QuizPage = () => {
 };
 
 export default QuizPage;
+
 
 
