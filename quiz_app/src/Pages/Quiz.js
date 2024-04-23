@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const QuizPage = () => {
     const { state } = useLocation();
+    const navigate = useNavigate(); // Import and setup the useNavigate hook
     const [questions, setQuestions] = useState([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [userAnswers, setUserAnswers] = useState([]);
@@ -67,6 +68,10 @@ const QuizPage = () => {
         }
     };
 
+    const handlePlayAgain = () => {
+        navigate('/'); // Navigate to the homepage
+    };
+
     if (!questions.length) return <div>Loading questions...</div>;
 
     const currentQuestion = questions[currentQuestionIndex];
@@ -92,11 +97,10 @@ const QuizPage = () => {
                 <div>
                     <h1>Quiz Completed</h1>
                     <p>Your Score: {score} out of {questions.length}</p>
-                    <button onClick={initializeQuiz} style={{ padding: '10px 20px', marginTop: '20px' }}>Play Again</button>
+                    <button onClick={handlePlayAgain} style={{ padding: '10px 20px', marginTop: '20px' }}>Play Again</button>
                 </div>
             )}
         </div>
     );
 };
-
 export default QuizPage;
