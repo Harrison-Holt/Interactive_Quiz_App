@@ -11,7 +11,6 @@ const QuizPage = () => {
 
     // Function to fetch questions from the API
     const fetchQuestions = async (num_questions, category, difficulty) => {
-        // Mapping of category names to their corresponding API integer codes
         const categoryMap = {
             "General Knowledge": 19, 
             "Computer Science": 18,
@@ -19,11 +18,9 @@ const QuizPage = () => {
             "Geography": 22,
             "History": 23
         };
-
-        // Convert the category string to its corresponding integer code
         const categoryCode = categoryMap[category] || 9; // Default to General Knowledge if not found
         const apiUrl = `https://opentdb.com/api.php?amount=${num_questions}&category=${categoryCode}&difficulty=${difficulty}&type=multiple`;
-        
+
         try {
             const response = await fetch(apiUrl);
             if (!response.ok) {
@@ -33,21 +30,25 @@ const QuizPage = () => {
             return data.results;
         } catch (error) {
             console.error("Error fetching questions from API:", error);
-            return []; 
+            return [];
         }
     };
 
     useEffect(() => {
-        const initializeQuiz = async () => {
-            if (!questions.length && state) {
-                const { num_questions, category, difficulty } = state;
-                const newQuestions = await fetchQuestions(num_questions, category, difficulty);
-                setQuestions(newQuestions);
-                setUserAnswers(new Array(newQuestions.length).fill(null));
-            }
-        };
         initializeQuiz();
-    }, [state]); // Depend on state to make sure it's available
+    }, [state]);
+
+    const initializeQuiz = async () => {
+        if (state) {
+            const { num_questions, category, difficulty } = state;
+            const newQuestions = await fetchQuestions(num_questions, category, difficulty);
+            setQuestions(newQuestions);
+            setUserAnswers(new Array(newQuestions.length).fill(null));
+            setCurrentQuestionIndex(0);
+            setScore(0);
+            setQuizFinished(false);
+        }
+    };
 
     const handleAnswer = (selectedAnswer) => {
         const correctAnswer = questions[currentQuestionIndex].correct_answer;
@@ -72,7 +73,7 @@ const QuizPage = () => {
     const options = [...currentQuestion.incorrect_answers, currentQuestion.correct_answer].sort(() => Math.random() - 0.5);
 
     return (
-        <div style={{ padding: '20px' }}>
+        <div style={{ padding: '20px', paddingTop: '60px' }}> {/* Adjusted padding to lower the content */}
             {!quizFinished ? (
                 <div>
                     <h2>Question {currentQuestionIndex + 1}:</h2>
@@ -91,6 +92,7 @@ const QuizPage = () => {
                 <div>
                     <h1>Quiz Completed</h1>
                     <p>Your Score: {score} out of {questions.length}</p>
+                    <button onClick={initializeQuiz} style={{ padding: '10px 20px', marginTop: '20px' }}>Play Again</button>
                 </div>
             )}
         </div>
@@ -98,6 +100,3 @@ const QuizPage = () => {
 };
 
 export default QuizPage;
-
-
-
