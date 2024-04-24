@@ -1,14 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import './header.css'; 
 
 function Header() {
     return (
         <header style={headerStyle}>
             <nav style={navStyle}>
-            <a href="https://personal-blog-website-kappa.vercel.app/" style={{ fontSize: '24px', color: 'white' }}>Home Page</a>
+            <a style={link_style} href="https://personal-blog-website-kappa.vercel.app/">Home Page</a>
             </nav>
         </header>
     );
+}
+const link_style = {
+    fontSize: '24px', 
+    color: 'white', 
+    textDecoration: "none"
 }
 
 const headerStyle = {
@@ -16,18 +21,18 @@ const headerStyle = {
     color: '#fff',
     textAlign: 'center',
     padding: '10px',
-    position: 'fixed', // Keep the header at the top
-    width: '100%', // Full width
-    top: 0, // Align to the top
-    left: 0, // Align to the left
-    zIndex: 1000, // Ensure it's above other content
+    position: 'fixed',
+    width: '100%',
+    top: 0, 
+    left: 0, 
+    zIndex: 1000, 
 }
 
 const navStyle = {
     display: 'flex',
-    justifyContent: 'center', // Center the links horizontally
-    alignItems: 'center', // Align the links vertically
-    height: '100%', // Fill the header height
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    height: '100%', 
 }
 
 const linkStyle = {
