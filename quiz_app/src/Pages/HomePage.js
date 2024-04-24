@@ -20,7 +20,7 @@ function Homepage() {
     return (
         <div className="homepage-container">
             <div className="quiz-box">
-                <h1 className="quiz-title">Welcome to the Quiz!</h1>
+                <h1 className="quiz-title">Welcome to Travia Quiz!</h1>
                 <form onSubmit={handleSubmit} className="quiz-form">
                     <div className="form-group">
                         <label htmlFor='num_questions'>Number of Questions:</label>
