@@ -19,7 +19,7 @@ const QuizPage = () => {
             "Geography": 22,
             "History": 23
         };
-        const categoryCode = categoryMap[category] || 9; // Default to General Knowledge if not found
+        const categoryCode = categoryMap[category] || 9; 
         const apiUrl = `https://opentdb.com/api.php?amount=${num_questions}&category=${categoryCode}&difficulty=${difficulty}&type=multiple`;
 
         try {
