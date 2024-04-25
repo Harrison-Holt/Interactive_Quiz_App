@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Homepage.css'; // Import CSS file
+import './Homepage.css'; 
 
 function Homepage() {
     const [numQuestions, setNumQuestions] = useState(5);
