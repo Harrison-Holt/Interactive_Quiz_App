@@ -16,7 +16,7 @@ const footerStyle = {
     color: '#fff', 
     textAlign: 'center', 
     padding: '10px',
-    position: 'fixed', // Keep the footer at the bottom
+    position: 'sticy', // Keep the footer at the bottom
     left: '0',
     bottom: '0',
     width: '100%', // Full width
