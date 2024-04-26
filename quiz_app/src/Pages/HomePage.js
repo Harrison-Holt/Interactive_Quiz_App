@@ -1,26 +1,43 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Homepage.css'; 
-
+import './Homepage.css';
 
 function Homepage() {
+    const categoryMap = {
+        "General Knowledge": 9,
+        "Entertainment: Books": 10,
+        "Entertainment: Film": 11,
+        "Entertainment: Music": 12,
+        "Entertainment: Musicals & Theatres": 13,
+        "Entertainment: Television": 14,
+        "Entertainment: Video Games": 15,
+        "Entertainment: Board Games": 16,
+        "Science & Nature": 17,
+        "Science: Computers": 18,
+        "Science: Mathematics": 19,
+        "Mythology": 20,
+        "Sports": 21,
+        "Geography": 22,
+        "History": 23,
+        "Politics": 24,
+        "Art": 25,
+        "Celebrities": 26,
+        "Animals": 27
+    };
+
     const [numQuestions, setNumQuestions] = useState(5);
-    const [category, setCategory] = useState('general');
+    const [category, setCategory] = useState(9); 
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        try {
-            navigate('/quiz', { state: { numQuestions, category } });  
-        } catch (error) {
-            console.error("Error navigating to quiz:", error);
-        }
+        navigate('/quiz', { state: { numQuestions, category: categoryMap[category] } });  
     };
 
     return (
         <div className="homepage-container">
             <div className="quiz-box">
-                <h1 className="quiz-title">Welcome to Travia Quiz!</h1>
+                <h1 className="quiz-title">Welcome to Trivia Quiz!</h1>
                 <form onSubmit={handleSubmit} className="quiz-form">
                     <div className="form-group">
                         <label htmlFor='num_questions'>Number of Questions:</label>
@@ -35,22 +52,17 @@ function Homepage() {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor='category'>Category:</label>
-                        <select id='category' value={category} onChange={(e) => setCategory(e.target.value)}>
-                            <option value="artliterature">Art & Literature</option>
-                            <option value="language">Language</option>
-                            <option value="sciencenature">Science & Nature</option>
-                            <option value="general">General</option>
-                            <option value="fooddrink">Food & Drink</option>
-                            <option value="peopleplaces">People & Places</option>
-                            <option value="geography">Geography</option>
-                            <option value="historyholidays">History & Holidays</option>
-                            <option value="entertainment">Entertainment</option>
-                            <option value="toysgames">Toys & Games</option>
-                            <option value="music">Music</option>
-                            <option value="mathematics">Mathematics</option>
-                            <option value="religionmythology">Religion & Mythology</option>
-                            <option value="sportsleisure">Sports & Leisure</option>
+                        <label htmlFor='category-select'>Category:</label>
+                        <select
+                            id="category-select"
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                        >
+                            {Object.entries(categoryMap).map(([categoryName, categoryId]) => (
+                                <option key={categoryId} value={categoryId}>
+                                    {categoryName}
+                                </option>
+                            ))}
                         </select>
                     </div>
                     <button type="submit" className="start-button">Start Quiz</button>

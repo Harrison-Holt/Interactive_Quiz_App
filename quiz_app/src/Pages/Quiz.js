@@ -1,66 +1,78 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom'; // Import useLocation to access navigation state
+import { useLocation } from 'react-router-dom';
 
 const TriviaComponent = () => {
-    const { state } = useLocation(); // Get the passed state from the location object
+    const { state } = useLocation();
     const [trivia, setTrivia] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
+    // Utility function to shuffle answers
+    const shuffleAnswers = (correct, incorrect) => {
+        const allAnswers = [correct, ...incorrect];
+        return allAnswers.sort(() => Math.random() - 0.5);
+    };
+
     useEffect(() => {
         const fetchTrivia = async () => {
-            const category = state?.category || 'mathematics'; // Use the passed category or default to 'mathematics'
-            const url = `https://api.api-ninjas.com/v1/trivia?category=${category}`;
+            const numQuestions = state?.numQuestions || 10;
+            const categoryId = state?.category; // This should be the numerical ID
+
+            if (!categoryId) {
+                setError('No category selected');
+                setLoading(false);
+                return;
+            }
+
+            const url = `https://opentdb.com/api.php?amount=${numQuestions}&category=${categoryId}`;
 
             try {
-                const response = await fetch(url, {
-                    method: 'GET',
-                    headers: {
-                        'X-Api-Key': 'Yvk4eNG2JLCJ5yGmJounqA==UOBJGJvJs8xcwlLt',
-                    }
-                });
-
+                const response = await fetch(url);
                 if (!response.ok) {
-                    throw new Error('Failed to fetch trivia questions. Status: ' + response.status);
+                    throw new Error(`Failed to fetch trivia questions. Status: ${response.status}`);
                 }
-
                 const data = await response.json();
-                setTrivia(data);
-                setLoading(false);
+                // Add a shuffled 'answers' array for each question
+                const questionsWithShuffledAnswers = data.results.map((question) => ({
+                    ...question,
+                    answers: shuffleAnswers(question.correct_answer, question.incorrect_answers),
+                }));
+                setTrivia(questionsWithShuffledAnswers);
             } catch (error) {
-                setError('Failed to load trivia: ' + error.message);
+                setError(`Failed to load trivia: ${error.message}`);
+            } finally {
                 setLoading(false);
             }
         };
 
-        if (state?.category) {
-            fetchTrivia();
-        } else {
-            setLoading(false);
-            setError('No category selected');
-        }
-    }, [state?.category]); // React to changes in the category passed via state
+        fetchTrivia();
+    }, [state?.numQuestions, state?.category]); // React to changes in either numQuestions or category
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
 
     return (
         <div>
-            <h1>{state?.category ? `${state.category} Trivia Questions` : 'Trivia Questions'}</h1>
+            <h1>Trivia Questions</h1>
             {trivia.length > 0 ? (
-                <ul>
+                <ol>
                     {trivia.map((item, index) => (
                         <li key={index}>
-                            <h2 dangerouslySetInnerHTML={{ __html: item.question }}></h2>
-                            <p>Answer: {item.answer}</p>
+                            <h2 dangerouslySetInnerHTML={{ __html: item.question }} />
+                            <ul>
+                                {item.answers.map((answer, i) => (
+                                    <li key={i} dangerouslySetInnerHTML={{ __html: answer }} />
+                                ))}
+                            </ul>
                         </li>
                     ))}
-                </ul>
+                </ol>
             ) : <p>No trivia questions found.</p>}
         </div>
     );
 };
 
 export default TriviaComponent;
+
 
 
