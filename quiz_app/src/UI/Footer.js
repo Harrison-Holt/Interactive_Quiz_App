@@ -2,6 +2,7 @@ import React from 'react';
 import './footer.css';
 
 function Footer() {
+
     const footerStyles = {
         display: 'flex',
         alignItems: 'center',
@@ -14,6 +15,7 @@ function Footer() {
         left: 0,
         bottom: 0,
         width: '100%',
+        marginTop: '40px'
     };
     
     const headerStyle = {
