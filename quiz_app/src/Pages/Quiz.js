@@ -82,8 +82,6 @@ const TriviaComponent = () => {
 
     return (
         <div className="trivia-container">
-            {/* Your existing code */}
-
             {showScore ? (
                 <div className="score-container">
                     <h1>Quiz Completed!</h1>
@@ -92,9 +90,13 @@ const TriviaComponent = () => {
                     <h2>Questions with Correct Answers:</h2>
                     <ol className="questions-list">
                         {trivia.map((item, index) => (
-                            <li key={index} className="question-item">
+                            <li key={index} className={`question-item ${!item.answeredCorrectly ? 'missed' : ''}`}>
                                 <h3 dangerouslySetInnerHTML={{ __html: he.decode(item.question) }} />
-                                <p>Correct Answer: {he.decode(item.correct_answer)}</p>
+                                {item.answeredCorrectly ? (
+                                    <p className="answer-correct">Correct Answer: {he.decode(item.correct_answer)}</p>
+                                ) : (
+                                    <p className="answer-incorrect">Your Answer: {he.decode(item.selected_answer)}</p>
+                                )}
                             </li>
                         ))}
                     </ol>
@@ -111,7 +113,7 @@ const TriviaComponent = () => {
                                     onClick={() => handleAnswerSelection(answer)} 
                                     className={`answer-button ${selectedAnswer === answer ? 'selected' : ''}`}
                                 >
-                                    {he.decode(answer)}
+                                    {answer}
                                 </button>
                             </li>
                         ))}
