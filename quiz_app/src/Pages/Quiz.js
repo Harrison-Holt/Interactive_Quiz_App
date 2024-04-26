@@ -14,6 +14,7 @@ const TriviaComponent = () => {
     };
 
     useEffect(() => {
+        console.log(state); 
         const fetchTrivia = async () => {
             const numQuestions = state?.numQuestions || 10;
             const categoryId = state?.category; // This should be the numerical ID
@@ -46,7 +47,7 @@ const TriviaComponent = () => {
         };
 
         fetchTrivia();
-    }, [state?.numQuestions, state?.category]); // React to changes in either numQuestions or category
+    }, [state?.numQuestions, state?.category]); 
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
