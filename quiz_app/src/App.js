@@ -4,7 +4,6 @@ const Header = lazy(() => import('./UI/Header'));
 const Footer = lazy(() => import('./UI/Footer'));
 const HomePage = lazy(() => import('./Pages/HomePage'));
 const Quiz = lazy(() => import('./Pages/Quiz'));
-const QuizResults = lazy(() => import('./Pages/QuizResults'));
 
 function App() {
   return (
@@ -15,7 +14,6 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/quiz" element={<Quiz />} />
-            <Route path="/results" element={<QuizResults />} />
           </Routes>
           <Footer />
         </div>
