@@ -26,12 +26,12 @@ function Homepage() {
     };
 
     const [numQuestions, setNumQuestions] = useState(5);
-    const [category, setCategory] = useState(9); 
+    const [selectedCategoryId, setSelectedCategoryId] = useState(9); // Define selectedCategoryId state variable
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate('/quiz', { state: { numQuestions, category: categoryMap[category] } });  
+        navigate('/quiz', { state: { numQuestions, category: selectedCategoryId } }); // Pass selectedCategoryId
     };
 
     return (
@@ -55,8 +55,8 @@ function Homepage() {
                         <label htmlFor='category-select'>Category:</label>
                         <select
                             id="category-select"
-                            value={category}
-                            onChange={(e) => setCategory(e.target.value)}
+                            value={selectedCategoryId}
+                            onChange={(e) => setSelectedCategoryId(parseInt(e.target.value))}
                         >
                             {Object.entries(categoryMap).map(([categoryName, categoryId]) => (
                                 <option key={categoryId} value={categoryId}>
@@ -73,4 +73,5 @@ function Homepage() {
 }
 
 export default Homepage;
+
 
