@@ -11,7 +11,7 @@
   /* Question container */
 .question-container {
     text-align: center;
-    margin-bottom: 40px;
+    margin: 40px 40px;
   }
   
   .question-container h1 {
