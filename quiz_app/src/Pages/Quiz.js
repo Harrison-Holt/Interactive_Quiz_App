@@ -9,7 +9,7 @@ const TriviaComponent = () => {
 
     const restartQuiz = () => {
         // Logic to reset any states if necessary
-        navigate('./HomePage.js');  // Adjust the path according to your route setup
+        navigate('/');  // Adjust the path according to your route setup
     };
     const { state } = useLocation();
     const [trivia, setTrivia] = useState([]);
