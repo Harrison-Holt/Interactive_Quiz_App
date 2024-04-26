@@ -78,7 +78,6 @@ const TriviaComponent = () => {
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
-}; 
 
     return (
         <div className="trivia-container">
@@ -98,7 +97,6 @@ const TriviaComponent = () => {
                     </ol>
                 </div>
             ) : (
-                // Inside the return statement of TriviaComponent
                 <div className="question-container">
                     <h1>Question {currentQuestionIndex + 1}</h1>
                     <h2 dangerouslySetInnerHTML={{ __html: trivia[currentQuestionIndex].question }} className="question-text" />
@@ -120,7 +118,7 @@ const TriviaComponent = () => {
             )}
         </div>
     );
-    
+};
 
 export default TriviaComponent;
 
