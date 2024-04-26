@@ -139,3 +139,13 @@
     font-size: 18px;
     color: #555;
   }
+
+  .correct-answer {
+    color: green;
+    font-weight: bold;
+}
+
+.incorrect-answer {
+    color: red;
+    font-weight: bold;
+}

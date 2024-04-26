@@ -97,12 +97,17 @@ const TriviaComponent = () => {
                     {trivia.map((item, index) => (
                         <li key={index} className="question-item">
                             <h3 dangerouslySetInnerHTML={{ __html: item.question }} />
-                            <p>Your Answer: {item.user_answer || "No answer selected"}</p> {/* Render user's answer */}
-                            <p>Correct Answer: {item.correct_answer}</p> {/* Render correct answer */}
+                            <p>Your Answer: {item.user_answer || "No answer selected"}
+                                <span className={item.user_answer === item.correct_answer ? "correct-answer" : "incorrect-answer"}>
+                                    {item.user_answer === item.correct_answer ? " (Correct)" : " (Incorrect)"}
+                                </span>
+                            </p>
+                            <p>Correct Answer: {item.correct_answer}</p>
                         </li>
                     ))}
                 </ol>
-             </div>
+            </div>
+            
             ) : (
                 <div className="question-container">
                     <h1>Question {currentQuestionIndex + 1}</h1>
