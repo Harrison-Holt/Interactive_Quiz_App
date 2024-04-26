@@ -9,7 +9,7 @@ const TriviaComponent = () => {
 
     const restartQuiz = () => {
         // Logic to reset any states if necessary
-        navigate('/');  // Adjust the path according to your route setup
+        navigate('/');  
     };
     const { state } = useLocation();
     const [trivia, setTrivia] = useState([]);
@@ -94,6 +94,7 @@ const TriviaComponent = () => {
     if (error) return <p>Error: {error}</p>;
 
     return (
+        <div className='app-container'>
         <div className="trivia-container">
             {showScore ? (
                 <div className="score-container">
@@ -136,6 +137,7 @@ const TriviaComponent = () => {
                     <button onClick={handleNextQuestion} className="next-button">Next Question</button>
                 </div>
             )}
+        </div>
         </div>
     );
 };

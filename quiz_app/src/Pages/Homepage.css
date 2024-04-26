@@ -67,3 +67,8 @@ button {
 button:hover {
     background-color: #0056b3; /* Darker shade of quiz theme color on hover */
 }
+.homepage-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
