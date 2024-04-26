@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './quiz.css'; 
 
 const TriviaComponent = () => {
+
+    const navigate = useNavigate();  // Initialize navigate function
+
+    const restartQuiz = () => {
+        // Logic to reset any states if necessary
+        navigate('./HomePage.js');  // Adjust the path according to your route setup
+    };
     const { state } = useLocation();
     const [trivia, setTrivia] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -91,7 +99,7 @@ const TriviaComponent = () => {
                 <div className="score-container">
                 <h1>Quiz Completed!</h1>
                 <p>Your Score: {score} out of {trivia.length}</p>
-                <button onClick={() => window.location.reload()} className="restart-button">Restart Quiz</button>
+                <button onClick={restartQuiz} className="restart-button">Restart Quiz</button>
                 <h2>Questions with Correct Answers:</h2>
                 <ol className="questions-list">
                     {trivia.map((item, index) => (
