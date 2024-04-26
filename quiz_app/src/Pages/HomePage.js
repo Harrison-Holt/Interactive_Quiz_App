@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Homepage.css'; 
 
+
 function Homepage() {
     const [numQuestions, setNumQuestions] = useState(5);
-    const [difficulty, setDifficulty] = useState('easy');
-    const [category, setCategory] = useState('General Knowledge');
+    const [category, setCategory] = useState('general');
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            navigate('/quiz', { state: { numQuestions, category, difficulty } });
+            navigate('/quiz', { state: { numQuestions, category } });  
         } catch (error) {
             console.error("Error navigating to quiz:", error);
         }
@@ -28,31 +28,32 @@ function Homepage() {
                             id='num_questions'
                             type='number'
                             value={numQuestions}
-                            onChange={(e) => setNumQuestions(parseInt(e.target.value, 10) || '')}
+                            onChange={(e) => setNumQuestions(parseInt(e.target.value, 10) || 5)}
                             min={5}
                             max={50}
                             required
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor='difficulty'>Difficulty:</label>
-                        <select id='difficulty' value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
-                            <option value='easy'>Easy</option>
-                            <option value='medium'>Medium</option>
-                            <option value='hard'>Hard</option>
-                        </select>
-                    </div>
-                    <div className="form-group">
                         <label htmlFor='category'>Category:</label>
                         <select id='category' value={category} onChange={(e) => setCategory(e.target.value)}>
-                            <option value='General Knowledge'>General Knowledge</option>
-                            <option value='Sports'>Sports</option>
-                            <option value='History'>History</option>
-                            <option value='Geography'>Geography</option>
-                            <option value='Computer Science'>Computer Science</option>
+                            <option value="artliterature">Art & Literature</option>
+                            <option value="language">Language</option>
+                            <option value="sciencenature">Science & Nature</option>
+                            <option value="general">General</option>
+                            <option value="fooddrink">Food & Drink</option>
+                            <option value="peopleplaces">People & Places</option>
+                            <option value="geography">Geography</option>
+                            <option value="historyholidays">History & Holidays</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="toysgames">Toys & Games</option>
+                            <option value="music">Music</option>
+                            <option value="mathematics">Mathematics</option>
+                            <option value="religionmythology">Religion & Mythology</option>
+                            <option value="sportsleisure">Sports & Leisure</option>
                         </select>
                     </div>
-                    <button type="submit">Start Quiz</button>
+                    <button type="submit" className="start-button">Start Quiz</button>
                 </form>
             </div>
         </div>
@@ -60,6 +61,4 @@ function Homepage() {
 }
 
 export default Homepage;
-
-
 

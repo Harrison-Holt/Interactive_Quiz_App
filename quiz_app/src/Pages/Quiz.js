@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 const QuizPage = () => {
     const { state } = useLocation();
-    const navigate = useNavigate(); // Import and setup the useNavigate hook
+    const navigate = useNavigate(); 
     const [questions, setQuestions] = useState([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [userAnswers, setUserAnswers] = useState([]);
@@ -11,28 +11,42 @@ const QuizPage = () => {
     const [quizFinished, setQuizFinished] = useState(false);
 
     // Function to fetch questions from the API
-    const fetchQuestions = async (num_questions, category, difficulty) => {
+    const fetchQuestions = async (num_questions, category) => {
         const categoryMap = {
-            "General Knowledge": 19, 
-            "Computer Science": 18,
-            "Sports": 21,
-            "Geography": 22,
-            "History": 23
+            "Art & Literature": "artliterature",
+            "Language": "language",
+            "Science & Nature": "sciencenature",
+            "General": "general",
+            "Food & Drink": "fooddrink",
+            "People & Places": "peopleplaces",
+            "Geography": "geography",
+            "History & Holidays": "historyholidays",
+            "Entertainment": "entertainment",
+            "Toys & Games": "toysgames",
+            "Music": "music",
+            "Mathematics": "mathematics",
+            "Religion & Mythology": "religionmythology",
+            "Sports & Leisure": "sportsleisure"
         };
-        const categoryCode = categoryMap[category]; 
-        const apiUrl = `https://opentdb.com/api.php?amount=${num_questions}&category=${categoryCode}&difficulty=${difficulty}&type=multiple`;
+        
+        const categoryCode = categoryMap[category] || "general"; 
+    const apiUrl = `https://api.api-ninjas.com/v1/trivia?limit=${num_questions}&category=${categoryCode}`;
 
-        try {
-            const response = await fetch(apiUrl);
-            if (!response.ok) {
-                throw new Error('Failed to fetch the quiz questions.');
+    try {
+        const response = await fetch(apiUrl, {
+            headers: {
+                'X-Api-Key': 'YOUR_API_KEY_HERE'  // Replace 'YOUR_API_KEY_HERE' with your actual API key
             }
-            const data = await response.json();
-            return data.results;
-        } catch (error) {
-            console.error("Error fetching questions from API:", error);
-            return [];
+        });
+        if (!response.ok) {
+            throw new Error('Failed to fetch the quiz questions.');
         }
+        const data = await response.json();
+        return data; // Adjust this part if the data structure requires it
+    } catch (error) {
+        console.error("Error fetching questions from API:", error);
+        return [];
+    }
     };
 
     useEffect(() => {
@@ -41,8 +55,8 @@ const QuizPage = () => {
 
     const initializeQuiz = async () => {
         if (state) {
-            const { num_questions, category, difficulty } = state;
-            const newQuestions = await fetchQuestions(num_questions, category, difficulty);
+            const { num_questions, category} = state;
+            const newQuestions = await fetchQuestions(num_questions, category);
             setQuestions(newQuestions);
             setUserAnswers(new Array(newQuestions.length).fill(null));
             setCurrentQuestionIndex(0);
