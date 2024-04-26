@@ -32,11 +32,12 @@ const TriviaComponent = () => {
                     throw new Error(`Failed to fetch trivia questions. Status: ${response.status}`);
                 }
                 const data = await response.json();
-                // Add a shuffled 'answers' array for each question
                 const questionsWithShuffledAnswers = data.results.map((question) => ({
                     ...question,
                     answers: shuffleAnswers(question.correct_answer, question.incorrect_answers),
+                    user_answer: null  // Initialize user_answer as null
                 }));
+                
                 setTrivia(questionsWithShuffledAnswers);
             } catch (error) {
                 setError(`Failed to load trivia: ${error.message}`);
@@ -63,8 +64,13 @@ const TriviaComponent = () => {
             setAnswerError(true);
             return;
         }
-        const currentQuestion = trivia[currentQuestionIndex];
-        const isCorrect = selectedAnswer === currentQuestion.correct_answer;
+        setTrivia(trivia.map((item, index) => {
+            if (index === currentQuestionIndex) {
+                return { ...item, user_answer: selectedAnswer };
+            }
+            return item;
+        }));
+        const isCorrect = selectedAnswer === trivia[currentQuestionIndex].correct_answer;
         if (isCorrect) {
             setScore(score + 1);
         }
@@ -82,21 +88,21 @@ const TriviaComponent = () => {
     return (
         <div className="trivia-container">
             {showScore ? (
-               <div className="score-container">
-               <h1>Quiz Completed!</h1>
-               <p>Your Score: {score} out of {trivia.length}</p>
-               <button onClick={() => window.location.reload()} className="restart-button">Restart Quiz</button>
-               <h2>Questions with Correct Answers:</h2>
-               <ol className="questions-list">
-                   {trivia.map((item, index) => (
-                       <li key={index} className="question-item">
-                           <h3 dangerouslySetInnerHTML={{ __html: item.question }} />
-                           <p>Your Answer: {item.user_answer}</p> {/* Render user's answer */}
-                           <p>Correct Answer: {item.correct_answer}</p> {/* Render correct answer */}
-                       </li>
-                   ))}
-               </ol>
-           </div>
+                <div className="score-container">
+                <h1>Quiz Completed!</h1>
+                <p>Your Score: {score} out of {trivia.length}</p>
+                <button onClick={() => window.location.reload()} className="restart-button">Restart Quiz</button>
+                <h2>Questions with Correct Answers:</h2>
+                <ol className="questions-list">
+                    {trivia.map((item, index) => (
+                        <li key={index} className="question-item">
+                            <h3 dangerouslySetInnerHTML={{ __html: item.question }} />
+                            <p>Your Answer: {item.user_answer || "No answer selected"}</p> {/* Render user's answer */}
+                            <p>Correct Answer: {item.correct_answer}</p> {/* Render correct answer */}
+                        </li>
+                    ))}
+                </ol>
+             </div>
             ) : (
                 <div className="question-container">
                     <h1>Question {currentQuestionIndex + 1}</h1>
