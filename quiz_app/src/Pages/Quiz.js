@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import './quiz.css'; // Import your CSS file
+import './quiz.css'; 
+import he from 'he';
 
 const TriviaComponent = () => {
     const { state } = useLocation();
