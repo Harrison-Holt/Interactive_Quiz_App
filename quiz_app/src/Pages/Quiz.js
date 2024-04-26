@@ -82,6 +82,8 @@ const TriviaComponent = () => {
 
     return (
         <div className="trivia-container">
+            {/* Your existing code */}
+
             {showScore ? (
                 <div className="score-container">
                     <h1>Quiz Completed!</h1>
@@ -91,8 +93,8 @@ const TriviaComponent = () => {
                     <ol className="questions-list">
                         {trivia.map((item, index) => (
                             <li key={index} className="question-item">
-                                <h3 dangerouslySetInnerHTML={{ __html: item.question }} />
-                                <p>Correct Answer: {item.correct_answer}</p>
+                                <h3 dangerouslySetInnerHTML={{ __html: he.decode(item.question) }} />
+                                <p>Correct Answer: {he.decode(item.correct_answer)}</p>
                             </li>
                         ))}
                     </ol>
@@ -100,7 +102,7 @@ const TriviaComponent = () => {
             ) : (
                 <div className="question-container">
                     <h1>Question {currentQuestionIndex + 1}</h1>
-                    <h2 dangerouslySetInnerHTML={{ __html: trivia[currentQuestionIndex].question }} className="question-text" />
+                    <h2 dangerouslySetInnerHTML={{ __html: he.decode(trivia[currentQuestionIndex].question) }} className="question-text" />
                     {answerError && <p className="answer-error">Please select an answer before proceeding</p>}
                     <ul className="answers-list">
                         {trivia[currentQuestionIndex].answers.map((answer, index) => (
@@ -109,7 +111,7 @@ const TriviaComponent = () => {
                                     onClick={() => handleAnswerSelection(answer)} 
                                     className={`answer-button ${selectedAnswer === answer ? 'selected' : ''}`}
                                 >
-                                    {answer}
+                                    {he.decode(answer)}
                                 </button>
                             </li>
                         ))}
