@@ -13,6 +13,7 @@
 
 .question-text {
     margin-bottom: 20px;
+    text-align: center; /* Center the question text */
 }
 
 .answer-error {
@@ -30,6 +31,8 @@
 }
 
 .answer-button {
+    display: block; /* Make the button full width */
+    width: 100%; /* Make the button full width */
     padding: 10px 20px;
     background-color: #007bff;
     color: #fff;
@@ -41,6 +44,10 @@
 
 .answer-button:hover {
     background-color: #0056b3;
+}
+
+.answer-button.selected {
+    background-color: #28a745; /* Change background color for selected answer */
 }
 
 .next-button {
