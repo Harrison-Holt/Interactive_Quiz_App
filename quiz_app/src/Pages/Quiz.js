@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import './quiz.css'; 
-import he from 'he';
 
 const TriviaComponent = () => {
     const { state } = useLocation();
@@ -91,11 +90,11 @@ const TriviaComponent = () => {
                     <ol className="questions-list">
                         {trivia.map((item, index) => (
                             <li key={index} className={`question-item ${!item.answeredCorrectly ? 'missed' : ''}`}>
-                                <h3 dangerouslySetInnerHTML={{ __html: he.decode(item.question) }} />
+                                <h3 dangerouslySetInnerHTML={{ __html: item.question }} />
                                 {item.answeredCorrectly ? (
-                                    <p className="answer-correct">Correct Answer: {he.decode(item.correct_answer)}</p>
+                                    <p className="answer-correct">Correct Answer: {item.correct_answer}</p>
                                 ) : (
-                                    <p className="answer-incorrect">Your Answer: {he.decode(item.selected_answer)}</p>
+                                    <p className="answer-incorrect">Your Answer: {item.selected_answer}</p>
                                 )}
                             </li>
                         ))}
@@ -104,7 +103,7 @@ const TriviaComponent = () => {
             ) : (
                 <div className="question-container">
                     <h1>Question {currentQuestionIndex + 1}</h1>
-                    <h2 dangerouslySetInnerHTML={{ __html: he.decode(trivia[currentQuestionIndex].question) }} className="question-text" />
+                    <h2 dangerouslySetInnerHTML={{ __html: trivia[currentQuestionIndex].question }} className="question-text" />
                     {answerError && <p className="answer-error">Please select an answer before proceeding</p>}
                     <ul className="answers-list">
                         {trivia[currentQuestionIndex].answers.map((answer, index) => (
