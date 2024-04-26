@@ -1,30 +1,52 @@
 import React from 'react';
+import './footer.css';
 
 function Footer() {
+    const footerStyles = {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '3px',
+        backgroundColor: '#4a76a8',
+        color: 'white',
+        textAlign: 'center',
+        position: 'fixed',
+        left: 0,
+        bottom: 0,
+        width: '100%',
+    };
+    
+    const headerStyle = {
+        marginRight: '20px',
+        fontSize: '24px',
+    };
+    
+    const iconStyle = {
+        fontSize: '24px',
+        textDecoration: 'none',
+        color: 'inherit',
+        marginRight: '20px',
+    };
+    
+    const emailIconStyle = {
+        ...iconStyle,
+        marginRight: '0',
+    };
+
     return (
-        <footer style={footerStyle}>
-            <p style={textStyle}>Last Updated March 13, 2024</p>
+        <footer style={footerStyles}>
+            <h1 style={headerStyle}>Let's Connect!</h1>
+            <a href="https://github.com/Harrison-Holt" className="icon-link" aria-label="Visit Harrison's GitHub profile" title="Visit Harrison's GitHub profile">
+                <i className="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/harrison-holt-18a703202" className="icon-link" aria-label="Visit Harrison's LinkedIn profile" title="Visit Harrison's LinkedIn profile">
+                <i className="fab fa-linkedin"></i>
+            </a>
+            <a href="mailto:hholt2901@gmail.com" className="icon-link email-icon" aria-label="Send an email to Harrison" title="Send an email to Harrison">
+                <i className="fa fa-envelope"></i>
+            </a>
         </footer>
-    ); 
-}
-
-const footerStyle = {
-    display: 'flex', // Use flexbox to center content
-    justifyContent: 'center', // Center horizontally
-    alignItems: 'center', // Center vertically
-    background: '#333', 
-    color: '#fff', 
-    textAlign: 'center', 
-    padding: '10px',
-    position: 'fixed', // Keep the footer at the bottom
-    left: '0',
-    bottom: '0',
-    width: '100%', // Full width
-}
-
-const textStyle = {
-    fontFamily: 'Times New Roman',
-    padding: '10px'
+    );
 }
 
 export default Footer;
