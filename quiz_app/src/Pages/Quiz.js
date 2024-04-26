@@ -6,18 +6,15 @@ const TriviaComponent = () => {
     const [trivia, setTrivia] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-
-    // Utility function to shuffle answers
-    const shuffleAnswers = (correct, incorrect) => {
-        const allAnswers = [correct, ...incorrect];
-        return allAnswers.sort(() => Math.random() - 0.5);
-    };
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [selectedAnswer, setSelectedAnswer] = useState('');
+    const [score, setScore] = useState(0);
+    const [showScore, setShowScore] = useState(false);
 
     useEffect(() => {
-        console.log(state); 
         const fetchTrivia = async () => {
             const numQuestions = state?.numQuestions || 10;
-            const categoryId = state?.category; // This should be the numerical ID
+            const categoryId = state?.category;
 
             if (!categoryId) {
                 setError('No category selected');
@@ -49,31 +46,69 @@ const TriviaComponent = () => {
         fetchTrivia();
     }, [state?.numQuestions, state?.category]); 
 
+    const shuffleAnswers = (correct, incorrect) => {
+        const allAnswers = [correct, ...incorrect];
+        return allAnswers.sort(() => Math.random() - 0.5);
+    };
+
+    const handleAnswerSelection = (answer) => {
+        setSelectedAnswer(answer);
+    };
+
+    const handleNextQuestion = () => {
+        const currentQuestion = trivia[currentQuestionIndex];
+        const isCorrect = selectedAnswer === currentQuestion.correct_answer;
+        if (isCorrect) {
+            setScore(score + 1);
+        }
+        setSelectedAnswer('');
+        if (currentQuestionIndex < trivia.length - 1) {
+            setCurrentQuestionIndex(currentQuestionIndex + 1);
+        } else {
+            setShowScore(true);
+        }
+    };
+
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
 
     return (
         <div>
-            <h1>Trivia Questions</h1>
-            {trivia.length > 0 ? (
-                <ol>
-                    {trivia.map((item, index) => (
-                        <li key={index}>
-                            <h2 dangerouslySetInnerHTML={{ __html: item.question }} />
-                            <ul>
-                                {item.answers.map((answer, i) => (
-                                    <li key={i} dangerouslySetInnerHTML={{ __html: answer }} />
-                                ))}
-                            </ul>
-                        </li>
-                    ))}
-                </ol>
-            ) : <p>No trivia questions found.</p>}
+            {showScore ? (
+                <div>
+                    <h1>Quiz Completed!</h1>
+                    <p>Your Score: {score} out of {trivia.length}</p>
+                    <button onClick={() => window.location.reload()}>Restart Quiz</button>
+                    <h2>Questions with Correct Answers:</h2>
+                    <ol>
+                        {trivia.map((item, index) => (
+                            <li key={index}>
+                                <h3 dangerouslySetInnerHTML={{ __html: item.question }} />
+                                <p>Correct Answer: {item.correct_answer}</p>
+                            </li>
+                        ))}
+                    </ol>
+                </div>
+            ) : (
+                <div>
+                    <h1>Question {currentQuestionIndex + 1}</h1>
+                    <h2 dangerouslySetInnerHTML={{ __html: trivia[currentQuestionIndex].question }} />
+                    <ul>
+                        {trivia[currentQuestionIndex].answers.map((answer, index) => (
+                            <li key={index}>
+                                <button onClick={() => handleAnswerSelection(answer)}>{answer}</button>
+                            </li>
+                        ))}
+                    </ul>
+                    <button onClick={handleNextQuestion} disabled={!selectedAnswer}>Next Question</button>
+                </div>
+            )}
         </div>
     );
 };
 
 export default TriviaComponent;
+
 
 
 
