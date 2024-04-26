@@ -65,6 +65,7 @@ const QuizPage = () => {
         }
     };
 
+
     const handleAnswer = (selectedAnswer) => {
         const correctAnswer = questions[currentQuestionIndex].correct_answer;
         const updatedAnswers = [...userAnswers];
