@@ -1,44 +1,28 @@
-import React from 'react';
+import React from 'react'; 
 import './header.css'; 
 
 function Header() {
     return (
-        <header style={headerStyle}>
-            <nav style={navStyle}>
-            <a style={link_style} href="https://personal-blog-website-kappa.vercel.app/">Home Page</a>
-            </nav>
+        <header style={Header_Style}>
+            <h1>Interactive Quiz Game</h1>
+            <a href="https://personal-blog-website-kappa.vercel.app/">Home Page</a>
         </header>
-    );
-}
-const link_style = {
-    fontSize: '24px', 
-    color: 'white', 
-    textDecoration: "none"
+    ); 
 }
 
-const headerStyle = {
-    background: '#333',
-    color: '#fff',
-    textAlign: 'center',
-    padding: '10px',
-    position: 'fixed',
-    width: '100%',
-    top: 0, 
-    left: 0, 
-    zIndex: 1000, 
+const Header_Style = {
+    display: 'flex', 
+    flexDirection: 'row', 
+    justifyContent: 'space-around', 
+    padding: '15px', 
+    width: '100%', 
+    position: 'sticky', 
+    zIndex: '1000', 
+    margin: '0', 
+    top: '0', 
+    left: '0',
+    backgroundColor: '#4a76a8', 
+    color: 'white',
 }
 
-const navStyle = {
-    display: 'flex',
-    justifyContent: 'center', 
-    alignItems: 'center', 
-    height: '100%', 
-}
-
-const linkStyle = {
-    color: '#fff',
-    textDecoration: 'none',
-    margin: '0 10px', // Add some space between links
-}
-
-export default Header;
+export default Header; 
