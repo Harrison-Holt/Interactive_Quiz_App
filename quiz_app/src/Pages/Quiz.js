@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import './TriviaComponent.css'; // Import your CSS file
 
 const TriviaComponent = () => {
     const { state } = useLocation();
@@ -73,16 +74,16 @@ const TriviaComponent = () => {
     if (error) return <p>Error: {error}</p>;
 
     return (
-        <div>
+        <div className="trivia-container">
             {showScore ? (
-                <div>
+                <div className="score-container">
                     <h1>Quiz Completed!</h1>
                     <p>Your Score: {score} out of {trivia.length}</p>
-                    <button onClick={() => window.location.reload()}>Restart Quiz</button>
+                    <button onClick={() => window.location.reload()} className="restart-button">Restart Quiz</button>
                     <h2>Questions with Correct Answers:</h2>
-                    <ol>
+                    <ol className="questions-list">
                         {trivia.map((item, index) => (
-                            <li key={index}>
+                            <li key={index} className="question-item">
                                 <h3 dangerouslySetInnerHTML={{ __html: item.question }} />
                                 <p>Correct Answer: {item.correct_answer}</p>
                             </li>
@@ -90,17 +91,17 @@ const TriviaComponent = () => {
                     </ol>
                 </div>
             ) : (
-                <div>
+                <div className="question-container">
                     <h1>Question {currentQuestionIndex + 1}</h1>
-                    <h2 dangerouslySetInnerHTML={{ __html: trivia[currentQuestionIndex].question }} />
-                    <ul>
+                    <h2 dangerouslySetInnerHTML={{ __html: trivia[currentQuestionIndex].question }} className="question-text" />
+                    <ul className="answers-list">
                         {trivia[currentQuestionIndex].answers.map((answer, index) => (
-                            <li key={index}>
-                                <button onClick={() => handleAnswerSelection(answer)}>{answer}</button>
+                            <li key={index} className="answer-item">
+                                <button onClick={() => handleAnswerSelection(answer)} className="answer-button">{answer}</button>
                             </li>
                         ))}
                     </ul>
-                    <button onClick={handleNextQuestion} disabled={!selectedAnswer}>Next Question</button>
+                    <button onClick={handleNextQuestion} disabled={!selectedAnswer} className="next-button">Next Question</button>
                 </div>
             )}
         </div>
@@ -108,7 +109,3 @@ const TriviaComponent = () => {
 };
 
 export default TriviaComponent;
-
-
-
-

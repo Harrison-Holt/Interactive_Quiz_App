@@ -1,0 +1,69 @@
+.trivia-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.score-container {
+    margin-top: 50px;
+}
+
+.question-container {
+    margin-top: 20px;
+}
+
+.question-text {
+    margin-bottom: 20px;
+}
+
+.answers-list {
+    list-style: none;
+    padding: 0;
+}
+
+.answer-item {
+    margin-bottom: 10px;
+}
+
+.answer-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.answer-button:hover {
+    background-color: #0056b3;
+}
+
+.next-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.next-button:hover {
+    background-color: #218838;
+}
+
+.restart-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.restart-button:hover {
+    background-color: #c82333;
+}
