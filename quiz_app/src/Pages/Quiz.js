@@ -11,6 +11,7 @@ const TriviaComponent = () => {
     const [selectedAnswer, setSelectedAnswer] = useState('');
     const [score, setScore] = useState(0);
     const [showScore, setShowScore] = useState(false);
+    const [answerError, setAnswerError] = useState(false);
 
     useEffect(() => {
         const fetchTrivia = async () => {
@@ -54,9 +55,14 @@ const TriviaComponent = () => {
 
     const handleAnswerSelection = (answer) => {
         setSelectedAnswer(answer);
+        setAnswerError(false);
     };
 
     const handleNextQuestion = () => {
+        if (!selectedAnswer) {
+            setAnswerError(true);
+            return;
+        }
         const currentQuestion = trivia[currentQuestionIndex];
         const isCorrect = selectedAnswer === currentQuestion.correct_answer;
         if (isCorrect) {
@@ -94,6 +100,7 @@ const TriviaComponent = () => {
                 <div className="question-container">
                     <h1>Question {currentQuestionIndex + 1}</h1>
                     <h2 dangerouslySetInnerHTML={{ __html: trivia[currentQuestionIndex].question }} className="question-text" />
+                    {answerError && <p className="answer-error">Please select an answer before proceeding</p>}
                     <ul className="answers-list">
                         {trivia[currentQuestionIndex].answers.map((answer, index) => (
                             <li key={index} className="answer-item">
@@ -101,7 +108,7 @@ const TriviaComponent = () => {
                             </li>
                         ))}
                     </ul>
-                    <button onClick={handleNextQuestion} disabled={!selectedAnswer} className="next-button">Next Question</button>
+                    <button onClick={handleNextQuestion} className="next-button">Next Question</button>
                 </div>
             )}
         </div>
@@ -109,3 +116,4 @@ const TriviaComponent = () => {
 };
 
 export default TriviaComponent;
+
