@@ -97,27 +97,29 @@ const TriviaComponent = () => {
                     </ol>
                 </div>
             ) : (
-              // Inside the return statement of TriviaComponent
-<div className="question-container">
-    <h1>Question {currentQuestionIndex + 1}</h1>
-    <h2 dangerouslySetInnerHTML={{ __html: trivia[currentQuestionIndex].question }} className="question-text" />
-    {answerError && <p className="answer-error">Please select an answer before proceeding</p>}
-    <ul className="answers-list">
-        {trivia[currentQuestionIndex].answers.map((answer, index) => (
-            <li key={index} className="answer-item">
-                <button 
-                    onClick={() => handleAnswerSelection(answer)} 
-                    className={`answer-button ${selectedAnswer === answer ? 'selected' : ''}`}
-                >
-                    {answer}
-                </button>
-            </li>
-        ))}
-    </ul>
-    <button onClick={handleNextQuestion} className="next-button">Next Question</button>
-</div>
+                // Inside the return statement of TriviaComponent
+                <div className="question-container">
+                    <h1>Question {currentQuestionIndex + 1}</h1>
+                    <h2 dangerouslySetInnerHTML={{ __html: trivia[currentQuestionIndex].question }} className="question-text" />
+                    {answerError && <p className="answer-error">Please select an answer before proceeding</p>}
+                    <ul className="answers-list">
+                        {trivia[currentQuestionIndex].answers.map((answer, index) => (
+                            <li key={index} className="answer-item">
+                                <button 
+                                    onClick={() => handleAnswerSelection(answer)} 
+                                    className={`answer-button ${selectedAnswer === answer ? 'selected' : ''}`}
+                                >
+                                    {answer}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                    <button onClick={handleNextQuestion} className="next-button">Next Question</button>
+                </div>
+            )}
+        </div>
     );
-};
+    
 
 export default TriviaComponent;
 
