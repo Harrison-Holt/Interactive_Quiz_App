@@ -82,24 +82,21 @@ const TriviaComponent = () => {
     return (
         <div className="trivia-container">
             {showScore ? (
-                <div className="score-container">
-                    <h1>Quiz Completed!</h1>
-                    <p>Your Score: {score} out of {trivia.length}</p>
-                    <button onClick={() => window.location.reload()} className="restart-button">Restart Quiz</button>
-                    <h2>Questions with Correct Answers:</h2>
-                    <ol className="questions-list">
-                        {trivia.map((item, index) => (
-                            <li key={index} className={`question-item ${!item.answeredCorrectly ? 'missed' : ''}`}>
-                                <h3 dangerouslySetInnerHTML={{ __html: item.question }} />
-                                {item.answeredCorrectly ? (
-                                    <p className="answer-correct">Correct Answer: {item.correct_answer}</p>
-                                ) : (
-                                    <p className="answer-incorrect">Your Answer: {item.selected_answer}</p>
-                                )}
-                            </li>
-                        ))}
-                    </ol>
-                </div>
+               <div className="score-container">
+               <h1>Quiz Completed!</h1>
+               <p>Your Score: {score} out of {trivia.length}</p>
+               <button onClick={() => window.location.reload()} className="restart-button">Restart Quiz</button>
+               <h2>Questions with Correct Answers:</h2>
+               <ol className="questions-list">
+                   {trivia.map((item, index) => (
+                       <li key={index} className="question-item">
+                           <h3 dangerouslySetInnerHTML={{ __html: item.question }} />
+                           <p>Your Answer: {item.user_answer}</p> {/* Render user's answer */}
+                           <p>Correct Answer: {item.correct_answer}</p> {/* Render correct answer */}
+                       </li>
+                   ))}
+               </ol>
+           </div>
             ) : (
                 <div className="question-container">
                     <h1>Question {currentQuestionIndex + 1}</h1>
