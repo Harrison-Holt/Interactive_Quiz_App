@@ -35,7 +35,7 @@ const QuizPage = () => {
     try {
         const response = await fetch(apiUrl, {
             headers: {
-                'X-Api-Key': 'YOUR_API_KEY_HERE'  // Replace 'YOUR_API_KEY_HERE' with your actual API key
+                'X-Api-Key': 'Yvk4eNG2JLCJ5yGmJounqA==UOBJGJvJs8xcwlLt'  
             }
         });
         if (!response.ok) {
