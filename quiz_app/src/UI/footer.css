@@ -6,7 +6,7 @@
 }
 
 .icon-link:hover i {
-    color: #017bff;
+    color: red;
     transform: scale(1.1);
 }
 

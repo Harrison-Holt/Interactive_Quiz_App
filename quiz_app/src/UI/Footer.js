@@ -7,7 +7,7 @@ function Footer() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '3px',
+        padding: '15px',
         backgroundColor: '#4a76a8',
         color: 'white',
         textAlign: 'center',
