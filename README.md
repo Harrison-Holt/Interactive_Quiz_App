@@ -1,0 +1,2 @@
+This project was made using React JS. This is the 4th project my web development portfolio. This is an Interactive Quiz Game. The user is able to pick the number of questions 5-50 then the category. Then the user plays the trivia game. Once finished, the user is shown the result and the questions with the correct answer. I used the Open Trivia Database for my quiz api. 
+The link for my projects is: https://interactive-quiz-app-five.vercel.app/. 
