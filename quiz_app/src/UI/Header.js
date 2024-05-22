@@ -5,7 +5,7 @@ function Header() {
     return (
         <header style={Header_Style}>
             <h1>Interactive Quiz Game</h1>
-            <a href="https://personal-blog-website-kappa.vercel.app/">Home Page</a>
+            <a href="https://www.harrisonholt.dev/">Home Page</a>
         </header>
     ); 
 }
