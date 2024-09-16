@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+
+footer {
+    font-family: 'Merriweather';
+}
+
+footer h2{
+    font-size: 36px;
+}
+.icon-link {
+    font-size: 36px;
+    text-decoration: none;
+    color: inherit;
+    margin-right: 20px;
+}
+
+.icon-link:hover i {
+    color: white;
+    transform: scale(1.1);
+}
+
+.email-icon {
+    margin-right: 0;
+}

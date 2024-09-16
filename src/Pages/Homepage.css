@@ -1,0 +1,74 @@
+/* Homepage.css */
+
+/* Homepage container */
+.homepage-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa; /* Light gray background */
+}
+
+/* Quiz box */
+.quiz-box {
+    background-color: #fff; /* White background */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+/* Quiz title */
+.quiz-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #007bff; /* Quiz theme color */
+}
+
+/* Quiz form */
+.quiz-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form group */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Label */
+label {
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+/* Input and select */
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da; /* Gray border */
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff; /* Quiz theme color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker shade of quiz theme color on hover */
+}
+.homepage-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}

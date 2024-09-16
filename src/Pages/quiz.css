@@ -1,0 +1,156 @@
+/* Overall container */
+.trivia-container {
+    max-width: 800px;
+    margin: 40px auto; /* Add margins and center horizontally */
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Question container */
+.question-container {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  
+  .question-container h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .question-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #555;
+  }
+  
+  /* Answer options */
+  .answers-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .answer-item {
+    margin-bottom: 15px;
+  }
+  
+  .answer-button {
+    padding: 12px 24px;
+    font-size: 18px;
+    border: 2px solid #007bff;
+    border-radius: 30px;
+    background-color: #fff;
+    color: #007bff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .answer-button:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .selected {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  /* Next button */
+  .next-button {
+    padding: 12px 24px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    background-color: #28a745;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-top: 20px; /* Add margin-top for spacing */
+  }
+  
+  .next-button:hover {
+    background-color: #218838;
+  }
+  
+  /* Error message */
+  .answer-error {
+    color: red;
+    margin-top: 10px;
+  }
+  
+  /* Score container */
+  .score-container {
+    text-align: center;
+    margin-top: 40px; /* Add margin-top for spacing */
+  }
+  
+  .score-container h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .score-container {
+    text-align: center;
+    margin-top: 20px; /* Add margin at the top */
+    margin-bottom: 20px; /* Add margin at the bottom */
+  }
+  
+  .restart-button {
+    padding: 12px 24px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    background-color: #dc3545;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .restart-button:hover {
+    background-color: #c82333;
+  }
+  
+  /* Questions with Correct Answers */
+  .questions-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .question-item {
+    margin-bottom: 30px; /* Add margin-bottom for spacing */
+  }
+  
+  .question-item h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .question-item p {
+    font-size: 18px;
+    color: #555;
+  }
+
+  .correct-answer {
+    color: green;
+    font-weight: bold;
+}
+
+.incorrect-answer {
+    color: red;
+    font-weight: bold;
+}
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
