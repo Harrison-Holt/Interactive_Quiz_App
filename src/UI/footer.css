@@ -3,7 +3,6 @@
 footer {
     font-family: 'Merriweather';
 }
-
 footer h2{
     font-size: 36px;
 }
@@ -13,12 +12,10 @@ footer h2{
     color: inherit;
     margin-right: 20px;
 }
-
 .icon-link:hover i {
     color: white;
     transform: scale(1.1);
 }
-
 .email-icon {
     margin-right: 0;
 }
