@@ -5,6 +5,7 @@ const Header = lazy(() => import('./UI/Header'));
 const Footer = lazy(() => import('./UI/Footer'));
 const HomePage = lazy(() => import('./Pages/HomePage'));
 const Quiz = lazy(() => import('./Pages/Quiz'));
+const Server = lazy(() => import('./Pages/Server'));
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/quiz" element={<Quiz />} />
+            <Route path="/message" element={<Server />} />
           </Routes>
           <Footer />
        </Container>      
