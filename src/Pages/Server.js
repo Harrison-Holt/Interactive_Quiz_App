@@ -4,7 +4,7 @@ export default function WebSocketComponent() {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const socket = new WebSocket("ws://44.197.176.247:8080");
+    const socket = new WebSocket("wss://TriviaGame-NLB-2ecf0d666da3596e.elb.us-east-1.amazonaws.com:443");
 
     socket.onopen = () => console.log("✅ WebSocket Connected!");
 
