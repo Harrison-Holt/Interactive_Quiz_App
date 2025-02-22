@@ -1,29 +1,31 @@
 import { useEffect, useState } from "react";
 
-export default function WebSocketComponent() {
-  const [messages, setMessages] = useState([]);
+export default function GameUpdates() {
+  const [gameData, setGameData] = useState("Waiting for updates...");
 
   useEffect(() => {
-    const socket = new WebSocket("ws://TriviaGame-NLB-2ecf0d666da3596e.elb.us-east-1.amazonaws.com:443");
+    const fetchGameUpdates = async () => {
+      try {
+        const response = await fetch("https://TriviaGame-NLB-2ecf0d666da3596e.elb.us-east-1.amazonaws.com/game-updates");
+        const data = await response.json();
+        setGameData(data.message);
+        console.log("📩 Game update received:", data);
 
-    socket.onopen = () => console.log("✅ WebSocket Connected!");
-
-    socket.onmessage = (event) => {
-      setMessages((prev) => [...prev, event.data]);
+        // Reconnect immediately after receiving data
+        fetchGameUpdates();
+      } catch (error) {
+        console.error("❌ Error fetching updates:", error);
+      }
     };
 
-    socket.onerror = (error) => console.error("❌ WebSocket Error:", error);
-    socket.onclose = () => console.log("🔌 WebSocket Disconnected!");
-
-    return () => socket.close();
+    fetchGameUpdates();
   }, []);
 
   return (
     <div>
-      <h2>WebSocket Messages</h2>
-      {messages.map((msg, index) => (
-        <p key={index}>{msg}</p>
-      ))}
+      <h2>Game Updates</h2>
+      <p>{gameData}</p>
     </div>
   );
 }
+
